@@ -3,10 +3,10 @@
 	$usuario='root';
 	$contra='';
 	$host='127.0.0.1';
-	$bbdd='practica17';
-	$tabla='noticias';
+	$bbdd='pelis_series';
+	$tabla='producciones';
 	$variable='datos';
-	$campos="(titulo,texto,usuario)";
+	$campos="(titulo,estreno,nacionalidad,puntuacion,vose,vos,vista)";
 
 /*********************************************************/
 

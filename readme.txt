@@ -1,1 +1,0 @@
-Práctica de bases de datos de Iván

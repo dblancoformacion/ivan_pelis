@@ -1,8 +1,17 @@
 <?php
-function sql2js($variable,$bbdd,$sql){
+/********** PARAMETROS CONFIGURACION **********************/
 	$usuario='root';
 	$contra='';
 	$host='127.0.0.1';
+
+/*********************************************************/
+	
+function sql12js($variable,$bbdd,$sql){
+
+	$usuario='root';
+	$contra='';
+	$host='127.0.0.1';
+
 	echo '<script type="text/javascript">';
 	echo "var $variable=new Array();";
 	$mysqli = new mysqli($host, $usuario, $contra, $bbdd);
@@ -19,7 +28,10 @@ function sql2js($variable,$bbdd,$sql){
 	}
 	echo "console.log($variable);";
 	echo '</script>	';
+
 }
+	
+/*********************************************************/
 
 ?>
 

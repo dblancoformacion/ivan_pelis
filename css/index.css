@@ -1,0 +1,238 @@
+@charset "utf-8";
+/*CSS document*/
+
+html, body{
+	width: 100%;
+	height: 100%;
+}
+
+.buscar{
+	line-height: 25px;
+	background-color: red;
+	color: white;
+	text-align: center;
+	margin: 0px 10px;
+	padding: 10px 50px;
+	float: right;
+}
+
+.buscar:hover{
+	background-color: #C9000CFF;
+	color: yellow;
+}
+
+#wrapper{
+	margin: 0 auto;
+	padding-top: 20px; 
+	width: 80%;
+	min-height: 800px;
+}
+header{
+	-webkit-border-radius: 10px;
+    border-radius: 10px;
+	background-color: grey;
+	font-size: 25px;
+	margin: 20px auto;
+	width: 95%;
+	height: 250px;
+}
+header h1{
+	margin: 10px;
+	padding: 5px;
+}
+header p{
+	margin: 10px;
+}
+header img{
+	margin: 10px;
+	width: 100%;
+	float: right;
+}
+.content{
+	width: 85%;
+	min-width: 20%;
+	margin: 0 auto;
+	text-align: center;
+}
+.producciones{
+	display: inline-block;
+	-webkit-border-radius: 10px;
+    border-radius: 10px;
+	margin: 5px;
+	width: 200px;
+	height: 280px;
+	background-color: #ccc;
+	color: black;
+}
+.producciones h3{
+	margin: 10px;
+}
+.producciones p{
+	margin: 10px;
+	line-height: 15px;
+}
+footer{
+	width: 100%;
+	height: 400px;
+	margin: 20px auto;
+}
+footer h2{
+	padding: 10px;
+	text-align: center;
+}
+.tabla {
+    display: table;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+.thead{
+	display: table-header-group;
+	background-color: #eee;
+	font-weight: bold;
+}
+.fila {
+    display: table-row;
+    text-align: center;
+    color: #C9000CFF;
+}
+.celda1 {
+	border-top: 1px solid grey;
+    display: table-cell;
+    text-align: center;
+    padding: 10px;
+}
+.celda {
+	border-top: 1px solid grey;
+    display: table-cell;
+    text-align: center;
+    padding: 10px 50px;
+}
+
+.generos-menu{
+	display: table;
+	width: 90%;
+	margin: 5px;
+	padding: 5px;
+}
+.generos-fila{
+	display: table-row;
+	margin: 5px;
+	padding: 5px;
+}
+.generos-celda{
+	display: table-cell;
+	margin: 5.5px;
+	padding: 5.5px;
+}
+.generos-menu a{
+	display: block;
+	background-color: pink;
+	text-decoration: none;
+	color: black;
+	text-align: center;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.generos-menu a:hover{
+	display: block;
+	background-color: #ccc;
+	text-decoration: none;
+	font-weight: bold;
+	text-align: center;
+}
+
+
+.cuerpo {
+    width: 850px;
+    margin: auto;
+}
+
+.cuerpo p {
+    font-size: 15px;
+    font-style: italic;
+    padding-top: 15px;
+}
+
+.cuerpo div {
+    display: inline-block;
+    width: 180px;
+    height: 150px;
+    border: 1px solid black;
+    margin: 20px 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Formulario de back.html */
+
+
+.formulario{
+	background-color: #ccc;
+	width: 90%;
+	min-height: 600px;
+}
+.izq{
+	width: 40%;
+	float: left;
+}	
+.der{
+	width: 40%;
+	float: right;
+}
+
+.formulario div{
+	width: 90%;
+}
+.num{
+	width: 60px;
+	text-align: center;
+}
+.pais{
+	width: 100px;
+}
+.label{
+	height: 25px;
+	background-color: #444444FF;
+	color: white;
+	text-align: center;
+	margin: 20px 0;
+	padding: 10px 20px;
+}
+label{
+	height: 25px;
+	color: white;
+	text-align: center;
+	margin: 20px 0;
+	padding: 10px 20px;
+}
+input{
+	width: 50%;
+	height: 25px;
+	margin: 10px;
+	padding: 1px;
+}
+button{
+	line-height: 25px;
+	background-color: grey;
+	color: white;
+	text-align: center;
+	margin: 0px 10px;
+	padding: 10px 50px;
+	float: right;
+}
+
+
+/* Fin formulario */
+
+
+/* MEDIA SCREEN  no está funcionando */
+
+.card-columns {
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 4;
+  }
+}
