@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
     <!-- content=width=device-width (ancho de la pantalla) (width=600 ancho de 600) initial-scale=1 (Escala inicial móvil), scalable (zoom yes or no), contraer yes or no -->
-    <title>Pelis y Series</title>
+    <title>Pelis y Series de Iván</title>
     <?php 
         if(!isset($_GET['id_genero'])) $_GET['id_genero']=1;   /* Es igual que:   if(isset($_GET['id_genero'])==0) */
         include_once "libreria.php";
