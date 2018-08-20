@@ -11,12 +11,12 @@
         if(!isset($_GET['id_genero'])) $_GET['id_genero']=1;   /* Es igual que:   if(isset($_GET['id_genero'])==0) */
         include_once "libreria.php";
         if(isset($_GET['busqueda'])){                          /* Es igual que:   if(isset($_GET['busqueda'])==1) */
-            sql12js('datos','pelis_series',"
+            sql12js('datos','ivan_pelis',"
                 SELECT * FROM producciones
                     WHERE titulo LIKE '%".$_GET['busqueda']."%';
             ");
 
-            sql12js('artistas','pelis_series', " SELECT * FROM (
+            sql12js('artistas','ivan_pelis', " SELECT * FROM (
                      SELECT id_artista,id_produccion,id_rol FROM(
                       SELECT id_produccion FROM producciones
                         WHERE titulo LIKE '%".$_GET['busqueda']."%'
@@ -25,13 +25,13 @@
                       JOIN roles USING(id_rol) ORDER BY rol DESC;");
         }
         else{
-            sql12js('datos','pelis_series', " SELECT * FROM (
+            sql12js('datos','ivan_pelis', " SELECT * FROM (
                 SELECT id_produccion FROM proyecta
                     WHERE id_genero=".($_GET['id_genero']*1)."
             ) c1 JOIN producciones USING(id_produccion);  
             ");
 
-            sql12js('artistas','pelis_series', "SELECT * FROM (
+            sql12js('artistas','ivan_pelis', "SELECT * FROM (
                 SELECT id_artista,id_produccion,id_rol FROM(
                     SELECT id_produccion FROM proyecta WHERE id_genero=".$_GET['id_genero']."
                         ) c1 JOIN participan USING(id_produccion)
@@ -40,7 +40,7 @@
 
         }
 
-        sql12js('generos','pelis_series', " SELECT * FROM generos ORDER BY genero;");
+        sql12js('generos','ivan_pelis', " SELECT * FROM generos ORDER BY genero;");
 
     ?>	<!-- <? ?> Aquí se introduce el php para que pueda ejecutarse -->
 
@@ -60,10 +60,12 @@
                     <button class="buscar">Buscar</button>
                 </input>
             </form>
-            <div class="generos-menu">
-            <div class="generos-fila">
-            </div>
-        </div>
+            <menu>
+                <div class="generos-menu">
+                    <div class="generos-fila">
+                    </div>
+                </div>
+            </menu>
         </header>
         <div class="generos-menu">
             <div class="generos-fila">
@@ -112,44 +114,7 @@
             </script>
 
             </div>
-            <!-- <div class="noticia">
-                <h3></h3>
-                <p>
-                    
-                </p>
-            </div>
-            <div class="noticia">
-                <h3><script type="text/javascript">document.write(datos[1].titulo)</script></h3>
-                <p>
-                    <script type="text/javascript">document.write(datos[1].estreno)</script>
-                    <script type="text/javascript">document.write(datos[1].pais)</script>
-                    <script type="text/javascript">document.write(datos[1].puntuacion)</script>
-                </p>
-            </div>
-            <div class="noticia">
-                <h3><script type="text/javascript">document.write(datos[2].titulo)</script></h3>
-                <p><script type="text/javascript">document.write(datos[2].texto)</script></p>
-            </div>
-            <div class="noticia">
-                <h3><script type="text/javascript">document.write(datos[3].titulo)</script></h3>
-                <p><script type="text/javascript">document.write(datos[3].texto)</script></p>
-            </div>
-            <div class="noticia">
-                <h3><script type="text/javascript">document.write(datos[4].titulo)</script></h3>
-                <p><script type="text/javascript">document.write(datos[4].texto)</script></p>
-            </div>
-            <div class="noticia">
-                <h3><script type="text/javascript">document.write(datos[5].titulo)</script></h3>
-                <p><script type="text/javascript">document.write(datos[5].texto)</script></p>
-            </div>
-            <div class="noticia">
-                <h3><script type="text/javascript">document.write(datos[6].titulo)</script></h3>
-                <p><script type="text/javascript">document.write(datos[6].texto)</script></p>
-            </div>
-            <div class="noticia">
-                <h3><script type="text/javascript">document.write(datos[7].titulo)</script></h3>
-                <p><script type="text/javascript">document.write(datos[7].texto)</script></p>
-            </div> -->
+            
         </div>
         <!-- Inicio del pie -->
         <footer>
@@ -162,9 +127,6 @@
                     <div class="celda">Puntuación</div>
                 </div>
                 <div class="fila">
-                    <div class="celda1">
-                        <script type="text/javascript">document.write(datos[1].id_produccion)</script>
-                    </div>
                     <div class="celda">
                         <script type="text/javascript">document.write(datos[1].titulo)</script>
                     </div>
@@ -179,9 +141,6 @@
                     </div>
                 </div>
                 <div class="fila">
-                    <div class="celda1">
-                        <script type="text/javascript">document.write(datos[2].id_produccion)</script>
-                    </div>
                     <div class="celda">
                         <script type="text/javascript">document.write(datos[2].titulo)</script>
                     </div>
@@ -196,9 +155,6 @@
                     </div>
                 </div>
                 <div class="fila">
-                    <div class="celda1">
-                        <script type="text/javascript">document.write(datos[3].id_produccion)</script>
-                    </div>
                     <div class="celda">
                         <script type="text/javascript">document.write(datos[3].titulo)</script>
                     </div>
@@ -213,9 +169,6 @@
                     </div>
                 </div>
                 <div class="fila">
-                    <div class="celda1">
-                        <script type="text/javascript">document.write(datos[4].id_produccion)</script>
-                    </div>
                     <div class="celda">
                         <script type="text/javascript">document.write(datos[4].titulo)</script>
                     </div>
@@ -230,9 +183,6 @@
                     </div>
                 </div>
                 <div class="fila">
-                    <div class="celda1">
-                        <script type="text/javascript">document.write(datos[5].id_produccion)</script>
-                    </div>
                     <div class="celda">
                         <script type="text/javascript">document.write(datos[5].titulo)</script>
                     </div>
@@ -247,9 +197,6 @@
                     </div>
                 </div>
                 <div class="fila">
-                   <div class="celda1">
-                        <script type="text/javascript">document.write(datos[6].id_produccion)</script>
-                    </div>
                     <div class="celda">
                         <script type="text/javascript">document.write(datos[6].titulo)</script>
                     </div>
@@ -264,9 +211,6 @@
                     </div>
                 </div>
                 <div class="fila">
-                    <div class="celda1">
-                        <script type="text/javascript">document.write(datos[7].id_produccion)</script>
-                    </div>
                     <div class="celda">
                         <script type="text/javascript">document.write(datos[7].titulo)</script>
                     </div>
@@ -281,9 +225,6 @@
                     </div>
                 </div>
                 <div class="fila">
-                   <div class="celda1">
-                        <script type="text/javascript">document.write(datos[8].id_produccion)</script>
-                    </div>
                     <div class="celda">
                         <script type="text/javascript">document.write(datos[8].titulo)</script>
                     </div>
