@@ -3,10 +3,10 @@
 	$usuario='root';
 	$contra='';
 	$host='127.0.0.1';
-	$bbdd='pelis_series';
+	$bbdd='ivan_pelis';
 	$tabla='producciones';
 	$variable='datos';
-	$campos="(titulo,estreno,nacionalidad,puntuacion,vose,vos,vista)";
+	$campos="(titulo,estreno,pais,puntuacion,vose,vos,vista)";
 
 /*********************************************************/
 
