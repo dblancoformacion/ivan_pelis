@@ -13,7 +13,7 @@
         if(isset($_GET['busqueda'])){                          /* Es igual que:   if(isset($_GET['busqueda'])==1) */
             sql12js('datos','ivan_pelis',"
                 SELECT * FROM producciones
-                    WHERE titulo LIKE '%".$_GET['busqueda']."%';
+                    WHERE titulo LIKE '%".$_GET['busqueda']."%' ORDER BY titulo;
             ");
 
             sql12js('artistas','ivan_pelis', " SELECT * FROM (
@@ -26,9 +26,9 @@
         }
         else{
             sql12js('datos','ivan_pelis', " SELECT * FROM (
-                SELECT id_produccion FROM proyecta
-                    WHERE id_genero=".($_GET['id_genero']*1)."
-            ) c1 JOIN producciones USING(id_produccion);  
+                SELECT DISTINCT id_produccion FROM proyecta
+                    -- WHERE id_genero=".($_GET['id_genero']*1)."
+                ) c1 JOIN producciones USING(id_produccion) ORDER BY titulo;  
             ");
 
             sql12js('artistas','ivan_pelis', "SELECT * FROM (
@@ -41,221 +41,230 @@
         }
 
         sql12js('generos','ivan_pelis', " SELECT * FROM generos ORDER BY genero;");
+        
 
-    ?>	<!-- <? ?> Aquí se introduce el php para que pueda ejecutarse -->
+    ?>  <!-- <? ?> Aquí se introduce el php para que pueda ejecutarse -->
 
     <link rel="stylesheet" href="css/reset.css" type="text/css" media="all" />
     <link rel="stylesheet" href="css/index.css" type="text/css" media="all" />
-    <script type="text/javascript" src="js/index.js"></script>
 </head>
 
 <body>
     <!-- Inicio del contenedor -->
     <div id="wrapper">
         <header>
-        	<h1>PELIS Y SERIES <img src="img/logo_rollo_mini.png"></h1>
-            <p>En esta web podremos ver toda la información de las películas y series de la base de datos.</p>
+            <h1>PELIS Y SERIES <img src="img/logo_rollo.png"></h1>
+            <p>En esta web podremos ver toda la información de las películas y series de Iván.</p>
             <form>
                 <input type="text" name="busqueda">
                     <button class="buscar">Buscar</button>
                 </input>
             </form>
-            <menu>
-                <div class="generos-menu">
-                    <div class="generos-fila">
-                    </div>
+            <div class="menu2">
+                <div class="menu-izq">
+                    <menu>
+                        <div class="generos-menu1">
+                            <div class="generos-fila1">
+                                <div class="generos-celda1">
+                                    <a href="pelis.php">PELÍCULAS</a>
+                                </div>
+                            </div>
+                        </div>
+                    </menu>
                 </div>
-            </menu>
-        </header>
-        <div class="generos-menu">
-            <div class="generos-fila">
+                <div class="menu-der">
+                    <menu>
+                        <div class="generos-menu">
+                            <div class="generos-celda">
+                                <a href="series.php">SERIES</a>
+                            </div>
+                    </div>
+                    </menu>
+                </div>
             </div>
-        </div>
-        <div class="content">
+        </header>
+        <div id='main'>
+            <article>
+                <div class="content">
 
                 <script type="text/javascript">
 
-                for (var i = 0; i < datos.length; i++) {
-                    document.write('<div class="producciones">');
-                    document.write('<div>');
-                    document.write('<h3>');
-                    document.write(datos[i].titulo);
-                    document.write('</h3>');
-                    document.write('<hr>');
-                    document.write('<p>');
-                    document.write(datos[i].estreno);
-                    document.write(' , País: ');
-                    document.write(datos[i].pais);
-                    document.write(' , Puntuación: ');
-                    document.write(datos[i].puntuacion);
-                    document.write(' , Vista: ');
-                    if(datos[i].vista==1){
-                        document.write('SÍ');
-                    }else{
-                        document.write('NO');
-                    }
-                    document.write('</p>');
-                    document.write('<hr>');
-                    document.write('<p>');
-                    document.write(artistas[0].rol);
-                    document.write(' : ');
-
-                for (var j = 0; j < artistas.length; j++) {
-                    if(datos[i].id_produccion==artistas[j].id_produccion){
-                        document.write(artistas[j].artista);
-                        document.write(' , ');
+                    for (var i = 0; i < datos.length; i++) {
+                        document.write('<div class="producciones1">');
+                        document.write('<div>');
+                        document.write('<h3>');
+                        document.write(datos[i].titulo);
+                        document.write('</h3>');
                         document.write('<p>');
+                        document.write(datos[i].estreno);
+                        document.write(' , País: ');
+                        document.write(datos[i].pais);
+                        document.write(' , Puntuación: ');
+                        if(datos[i].puntuacion==0){
+                            document.write(' - ');
+                        }else{
+                            document.write(datos[i].puntuacion);
                         }
+                        document.write(' , Vista: ');
+                        if(datos[i].vista==1){
+                            document.write('SÍ');
+                            document.write('</p>');
+                        }else{
+                            document.write('NO');
+                            document.write('</p>');
+                        }
+                        document.write('</p>');
+                        document.write('</div>');
+                        document.write('</div>');
                     }
-                    document.write('</div>');
-                    document.write('</div>');
-                }
 
-            </script>
+                </script>
+
+            <?php
+            ?>
+
+                <!-- for ($i = 0; $i < strlen($datos); $i++) {
+                    echo ('<div class="producciones1">');
+                    echo ('<div>');
+                    echo ('<h3>');
+                    echo($datos[$i].$titulo);
+                    echo('</h3>');
+                    echo('<hr>');
+                    echo('<p>');
+                    echo($datos[$i].$estreno);
+                    echo(' , País: ');
+                    echo($datos[$i].$pais);
+                    echo(' , Puntuación: ');
+                    if($datos[i].$puntuacion==0){
+                            echo(' - ');
+                        }else{
+                            echo($datos[i].$puntuacion);
+                        }
+                    echo(' , Vista: ');
+                    if($datos[$i].$vista==1){
+                        echo('SÍ');
+                    }else{
+                        echo('NO');
+                    }
+                    echo('</p>');
+                    echo('</div>');
+                    echo('</div>');
+                } -->
+
+            <?php
+            ?>
+
 
             </div>
-            
+            </article>
+            <nav>
+                <!-- <menu>
+                    <div class="generos-menu1">
+                        <div class="generos-fila1">
+                            <div class="generos-celda1">
+                                <a href="pelis.php">PELÍCULAS</a>
+                            </div>
+                        </div>
+                    </div>
+                </menu> -->
+                <?php
+
+                    sql12js('datos','ivan_pelis', " SELECT * FROM producciones LEFT JOIN (
+            SELECT DISTINCT id_produccion FROM temporadas
+                ) c1 USING(id_produccion) WHERE c1.id_produccion IS NULL ORDER BY titulo;;");
+
+                ?>
+                <script type="text/javascript">
+
+                    for (var i = 0; i < datos.length; i++) {
+                        document.write('<div class="producciones">');
+                        document.write('<div>');
+                        document.write('<h3>');
+                        document.write(datos[i].titulo);
+                        document.write('</h3>');
+                        document.write('<hr>');
+                        document.write('<p>');
+                        document.write(datos[i].estreno);
+                        document.write(' , País: ');
+                        document.write(datos[i].pais);
+                        document.write(' , Puntuación: ');
+                        if(datos[i].puntuacion==0){
+                            document.write(' - ');
+                        }else{
+                            document.write(datos[i].puntuacion);
+                        }
+                        document.write(' , Vista: ');
+                        if(datos[i].vista==1){
+                            document.write('SÍ');
+                            document.write('</p>');
+                        }else{
+                            document.write('NO');
+                            document.write('</p>');
+                        }
+                        document.write('</div>');
+                        document.write('</div>');
+                    }
+
+                </script>
+
+            </nav>
+            <aside>
+                <!-- <menu>
+                    <div class="generos-menu">
+                        <div class="generos-celda">
+                            <a href="series.php">SERIES</a>
+                        </div>
+                    </div>
+                </menu> -->
+                
+                <?php
+
+        sql12js('datos','ivan_pelis', " SELECT * FROM producciones LEFT JOIN (
+            SELECT DISTINCT id_produccion FROM temporadas
+                ) c1 USING(id_produccion) WHERE c1.id_produccion IS NOT NULL ORDER BY titulo;;");
+
+                ?>
+
+                <script type="text/javascript">
+
+                    for (var i = 0; i < datos.length; i++) {
+                        document.write('<div class="producciones">');
+                        document.write('<div>');
+                        document.write('<h3>');
+                        document.write(datos[i].titulo);
+                        document.write('</h3>');
+                        document.write('<hr>');
+                        document.write('<p>');
+                        document.write(datos[i].estreno);
+                        document.write(' , País: ');
+                        document.write(datos[i].pais);
+                        document.write(' , Puntuación: ');
+                        if(datos[i].puntuacion==0){
+                            document.write(' - ');
+                        }else{
+                            document.write(datos[i].puntuacion);
+                        }
+                        document.write(' , Vista: ');
+                        if(datos[i].vista==1){
+                            document.write('SÍ');
+                            document.write('</p>');
+                        }else{
+                            document.write('NO');
+                            document.write('</p>');
+                        }
+                        document.write('</div>');
+                        document.write('</div>');
+                    }
+
+                </script>
+
+            </aside>
         </div>
-        <!-- Inicio del pie -->
         <footer>
-        	<h2>LISTADO DE PELÍCULAS Y SERIES</h2>
-            <div class="tabla">
-                <div class="thead">
-                    <div class="celda">Título</div>
-                    <div class="celda">Estreno</div>
-                    <div class="celda">País</div>
-                    <div class="celda">Puntuación</div>
-                </div>
-                <div class="fila">
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[1].titulo)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[1].estreno)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[1].pais)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[1].puntuacion)</script>
-                    </div>
-                </div>
-                <div class="fila">
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[2].titulo)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[2].estreno)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[2].pais)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[2].puntuacion)</script>
-                    </div>
-                </div>
-                <div class="fila">
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[3].titulo)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[3].estreno)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[3].pais)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[3].puntuacion)</script>
-                    </div>
-                </div>
-                <div class="fila">
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[4].titulo)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[4].estreno)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[4].pais)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[4].puntuacion)</script>
-                    </div>
-                </div>
-                <div class="fila">
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[5].titulo)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[5].estreno)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[5].pais)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[5].puntuacion)</script>
-                    </div>
-                </div>
-                <div class="fila">
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[6].titulo)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[6].estreno)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[6].pais)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[6].puntuacion)</script>
-                    </div>
-                </div>
-                <div class="fila">
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[7].titulo)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[7].estreno)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[7].pais)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[7].puntuacion)</script>
-                    </div>
-                </div>
-                <div class="fila">
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[8].titulo)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[8].estreno)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[8].pais)</script>
-                    </div>
-                    <div class="celda">
-                        <script type="text/javascript">document.write(datos[8].puntuacion)</script>
-                    </div>
-                </div>
-            </div>
+            <h2>© 2018 PROYECTO PERSONAL DE LA BASE DE DATOS &nbsp; - &nbsp; I. Garrote</h2>
         </footer>
-        <!-- Fin del pie -->
     </div>
-        <!-- Fin contenedor -->
-
-    <script type="text/javascript">
-        
-        var g=document.querySelector('.generos-fila');
-        for(var i=0;i<generos.length;i++){
-            g.innerHTML+='<div class="generos-celda">';
-            g.innerHTML+='<a href="?id_genero='+generos[i].id_genero+'">'+generos[i].genero;
-            g.innerHTML+='</a>';
-            g.innerHTML+='</div>';
-    }
-
-    </script>
-
+    <!-- Fin contenedor -->
 </body>
 
 </html>
