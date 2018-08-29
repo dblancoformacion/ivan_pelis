@@ -51,7 +51,7 @@ CREATE TABLE roles(
   UNIQUE(rol)
   );
 
-/* CREAR LA RELACIÓN PERTENECE */
+/* CREAR LA RELACIÃ“N PERTENECE */
 
 CREATE TABLE pertenece(
   id_produccion int,
@@ -61,7 +61,7 @@ CREATE TABLE pertenece(
   FOREIGN KEY(id_franquicia) REFERENCES franquicias(id_franquicia)
   );
 
-/* CREAR LA RELACIÓN PROYECTA */
+/* CREAR LA RELACIÃ“N PROYECTA */
 
 CREATE TABLE proyecta(
   id_produccion int,
@@ -71,7 +71,7 @@ CREATE TABLE proyecta(
   FOREIGN KEY(id_genero) REFERENCES generos(id_genero)
   );
 
-/* CREAR LA RELACIÓN PARTICIPAN */
+/* CREAR LA RELACIÃ“N PARTICIPAN */
 
 CREATE TABLE participan(
   id_produccion int,
@@ -132,9 +132,9 @@ INSERT INTO producciones VALUES
 (24, 'The 100', 2014, 'EEUU', 0, 0, NULL, 0),
 (25, 'Vikings', 2013, 'Irlanda, Canada', 0, 0, NULL, 0),
 (26, 'El lado bueno de las cosas', 2012, 'EEUU', 0, 0, 8.8, 1),
-(27, 'El Señor de los Anillos: La Comunidad del Anillo', 2001, 'Nueva Zelanda, EEUU', 0, 0, 9.7, 1),
-(28, 'El Señor de los Anillos: Las dos Torres', 2002, 'EEUU, Nueva Zelanda', 0, 0, 9.6, 1),
-(29, 'El Señor de los Anillos: El Retorno del Rey', 2003, 'EEUU, Nueva Zelanda', 0, 0, 9.5, 1),
+(27, 'El SeÃ±or de los Anillos: La Comunidad del Anillo', 2001, 'Nueva Zelanda, EEUU', 0, 0, 9.7, 1),
+(28, 'El SeÃ±or de los Anillos: Las dos Torres', 2002, 'EEUU, Nueva Zelanda', 0, 0, 9.6, 1),
+(29, 'El SeÃ±or de los Anillos: El Retorno del Rey', 2003, 'EEUU, Nueva Zelanda', 0, 0, 9.5, 1),
 (30, 'Los Vengadores', 2012, 'EEUU', 0, 0, 9.5, 1);
 
 
@@ -228,7 +228,7 @@ INSERT INTO franquicias VALUES
 (4, 'Star Wars'),
 (5, 'Sin franquicia'),
 (6, 'Harry Potter'),
-(7, 'El Señor de los Anillos'),
+(7, 'El SeÃ±or de los Anillos'),
 (8, 'El Hobbit'),
 (9, 'Fast & Furious'),
 (10, 'Jurassic Park'),
@@ -241,25 +241,25 @@ INSERT INTO franquicias VALUES
 -- Dumping data for table generos
 --
 INSERT INTO generos VALUES
-(1, 'Acción'),
-(2, 'Animación'),
+(1, 'AcciÃ³n'),
+(2, 'AnimaciÃ³n'),
 (3, 'Aventura'),
 (4, 'SciFi'),
 (5, 'Comedia'),
 (6, 'Drama'),
-(7, 'Fantasía'),
+(7, 'FantasÃ­a'),
 (8, 'Romance'),
 (9, 'Suspense'),
 (10, 'Terror'),
-(11, 'Bélico'),
-(12, 'Histórico'),
-(13, 'Crímen');
+(11, 'BÃ©lico'),
+(12, 'HistÃ³rico'),
+(13, 'CrÃ­men');
 
 -- 
 -- Dumping data for table roles
 --
 INSERT INTO roles VALUES
-(1, 'Actúa'),
+(1, 'ActÃºa'),
 (2, 'Dirige'),
 (3, 'Produce'),
 (4, 'Escribe');
@@ -488,14 +488,14 @@ INSERT INTO temporadas VALUES
 (22, 25, 1, 9, 0);
 
 
--- MOSTRAR TODAS LAS PRODUCCIONES Y GÉNEROS
+-- MOSTRAR TODAS LAS PRODUCCIONES Y GÃ‰NEROS
 
 SELECT titulo,genero,estreno,puntuacion
   FROM  proyecta JOIN producciones
   USING(id_produccion) JOIN generos USING(id_genero) ORDER BY titulo;
 
 
--- MOSTRAR TODAS LAS PELÍCULAS
+-- MOSTRAR TODAS LAS PELÃCULAS
 SELECT * FROM producciones LEFT JOIN (
     SELECT DISTINCT id_produccion FROM temporadas
   ) c1 USING(id_produccion) WHERE c1.id_produccion IS NULL ORDER BY titulo;
@@ -516,7 +516,7 @@ SELECT * FROM producciones LEFT JOIN (
   JOIN producciones USING(id_produccion) ORDER BY titulo;
 
 
--- MOSTRAR PELÍCULAS POR GÉNERO           (En el la consulta en php, sustituir id_genero=1 por:) -->>      id_genero=".$_GET['id_genero']."
+-- MOSTRAR PELÃCULAS POR GÃ‰NERO           (En el la consulta en php, sustituir id_genero=1 por:) -->>      id_genero=".$_GET['id_genero']."
 
 SELECT * FROM (
     SELECT c1.id_produccion FROM (
@@ -526,7 +526,7 @@ SELECT * FROM (
   ) c1 JOIN producciones USING(id_produccion) ORDER BY titulo;
 
 
--- MOSTRAR PELÍCULAS POR GÉNERO (menos eficiente)          (En el la consulta en php, sustituir id_genero=1 por:) -->>      id_genero=".$_GET['id_genero']."
+-- MOSTRAR PELÃCULAS POR GÃ‰NERO (menos eficiente)          (En el la consulta en php, sustituir id_genero=1 por:) -->>      id_genero=".$_GET['id_genero']."
 
 SELECT * FROM (
   SELECT id_produccion FROM proyecta
@@ -538,7 +538,7 @@ SELECT * FROM (
     ) producciones USING(id_produccion) ORDER BY titulo;
 
 
--- MOSTRAR SERIES POR GÉNERO              (En el la consulta en php, sustituir id_genero=1 por:) -->>      id_genero=".$_GET['id_genero']."
+-- MOSTRAR SERIES POR GÃ‰NERO              (En el la consulta en php, sustituir id_genero=1 por:) -->>      id_genero=".$_GET['id_genero']."
 
 SELECT * FROM (
     SELECT c1.id_produccion FROM (
@@ -548,7 +548,7 @@ SELECT * FROM (
   ) c1 JOIN producciones USING(id_produccion) ORDER BY titulo;
 
 
--- MOSTRAR SERIES POR GÉNERO (menos eficiente)              (En el la consulta en php, sustituir id_genero=1 por:) -->>      id_genero=".$_GET['id_genero']."
+-- MOSTRAR SERIES POR GÃ‰NERO (menos eficiente)              (En el la consulta en php, sustituir id_genero=1 por:) -->>      id_genero=".$_GET['id_genero']."
 
 SELECT * FROM (
   SELECT id_produccion FROM proyecta
@@ -561,7 +561,7 @@ SELECT * FROM (
 
 
 
--- PRODUCCIONES DEL GÉNERO 3
+-- PRODUCCIONES DEL GÃ‰NERO 3
 
 SELECT id_produccion FROM proyecta WHERE id_genero=3; 
 SELECT * FROM (
@@ -569,7 +569,7 @@ SELECT * FROM (
  			) c1 JOIN producciones USING(id_produccion);
 
 
--- ARTISTAS QUE PARTICIPAN Y ROLES EN PRODUCCIONES DE GÉNERO 3   (En el la consulta en php, sustituir titanic por:) -->>      id_genero=".$_GET['id_genero']."
+-- ARTISTAS QUE PARTICIPAN Y ROLES EN PRODUCCIONES DE GÃ‰NERO 3   (En el la consulta en php, sustituir titanic por:) -->>      id_genero=".$_GET['id_genero']."
 
 SELECT id_produccion FROM proyecta WHERE id_genero=3;
 SELECT id_artista FROM(
@@ -597,7 +597,7 @@ SELECT id_artista,id_produccion FROM(
   ) c2 JOIN artistas USING(id_artista); 
 
 
--- ARTISTAS Y ROLES DE CADA PRODUCCIÓN
+-- ARTISTAS Y ROLES DE CADA PRODUCCIÃ“N
 
 SELECT titulo,artista,rol
   FROM  participan
@@ -607,7 +607,15 @@ SELECT titulo,artista,rol
   ORDER BY titulo;
 
 
--- ARTISTAS SEGÚN GÉNERO (En el la consulta en php, sustituir titanic por:) -->>       '%".$_GET['busqueda']."%'
+-- ARTISTAS SEGÃšN GÃ‰NERO (En el la consulta en php, sustituir titanic por:) -->>       '%".$_GET['busqueda']."%'
+
+SELECT * FROM (
+ SELECT id_artista,id_produccion,id_rol FROM(
+  SELECT id_produccion FROM proyecta WHERE id_genero=1
+ ) c1 JOIN participan USING(id_produccion)
+) c2 JOIN artistas USING(id_artista)
+  JOIN roles USING(id_rol) ORDER BY id_produccion,rol DESC;
+
 
 SELECT id_produccion FROM producciones
   WHERE titulo LIKE '%titanic%';
@@ -617,13 +625,6 @@ SELECT DISTINCT id_genero FROM (
     WHERE titulo LIKE '%titanic%'
   )c1 JOIN proyecta USING(id_produccion);
 
-SELECT * FROM (
- SELECT id_artista,id_produccion,id_rol FROM(
-  SELECT id_produccion FROM proyecta WHERE id_genero=1
- ) c1 JOIN participan USING(id_produccion)
-) c2 JOIN artistas USING(id_artista)
-  JOIN roles USING(id_rol) ORDER BY rol DESC;
-
 -- ------------------------------------
 
 SELECT * FROM (
@@ -632,7 +633,7 @@ SELECT * FROM (
     WHERE titulo LIKE '%titanic%'
  ) c1 JOIN participan USING(id_produccion)
 ) c2 JOIN artistas USING(id_artista)
-  JOIN roles USING(id_rol) ORDER BY rol DESC;
+  JOIN roles USING(id_rol) ORDER BY id_produccion,rol DESC;
 
 
 
